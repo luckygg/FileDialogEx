@@ -100,14 +100,14 @@ void CFTech_FileDialogExDlg::OnBnClickedBtnSave()
 void CFTech_FileDialogExDlg::OnBnClickedBtnLoad()
 {
 	CString path=_T("");
-	CFileDialogEx::GetPathOpenFileDlg(path);
+	CFileDialogEx::GetPathOpenFileDlg(path, _T("C:\\"));
 }
 
 
 void CFTech_FileDialogExDlg::OnBnClickedBtnSetpath()
 {
 	CString path=_T("");
-	CFileDialogEx::GetPathSelectFolder(path);
+	CFileDialogEx::GetPathSelectFolder(path, _T("C:\\"));
 }
 
 

@@ -3,7 +3,7 @@
 //----------------------------------------------------------
 // Programmed by William Kim
 //----------------------------------------------------------
-// Last Update : 2016-11-17 10:02
+// Last Update : 2017-09-05 15:00
 // Modified by William Kim
 //----------------------------------------------------------
 #pragma once
@@ -14,10 +14,10 @@ public:
 	CFileDialogEx(void);
 	~CFileDialogEx(void);
 
-	static bool GetPathOpenFileDlg(CString &strValue);
-	static bool GetPathOpenFileDlg(CStringArray &arrValue);
-	static bool GetPathSaveFileDlg(CString &strValue);
-	static bool GetPathSelectFolder(CString &strValue);
+	static bool GetPathOpenFileDlg(CString &strValue, CString strInitDir=_T(""));
+	static bool GetPathOpenFileDlg(CStringArray &arrValue, CString strInitDir=_T(""));
+	static bool GetPathSaveFileDlg(CString &strValue, CString strInitDir=_T(""));
+	static bool GetPathSelectFolder(CString &strValue, CString strInitDir=_T(""));
 	static void SetFileExtension(CString strExtension);
 private :
 	static CString m_strFileFilter;

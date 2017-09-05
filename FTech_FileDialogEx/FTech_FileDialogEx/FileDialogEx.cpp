@@ -13,11 +13,14 @@ CFileDialogEx::~CFileDialogEx(void)
 }
 
 
-bool CFileDialogEx::GetPathOpenFileDlg(CString &strValue)
+bool CFileDialogEx::GetPathOpenFileDlg(CString &strValue, CString strInitDir)
 {
 	CString	strFilter = _T("All Files (*.*)|*.*||");
 
 	CFileDialog FileDlg(TRUE, NULL, NULL, 0, m_strFileFilter);
+
+	if (strInitDir.IsEmpty() == false)
+		FileDlg.m_ofn.lpstrInitialDir = strInitDir;
 
 	if( FileDlg.DoModal() != IDOK ) return false;
 
@@ -26,7 +29,7 @@ bool CFileDialogEx::GetPathOpenFileDlg(CString &strValue)
 	return true;
 }
 
-bool CFileDialogEx::GetPathOpenFileDlg(CStringArray &arrValue)
+bool CFileDialogEx::GetPathOpenFileDlg(CStringArray &arrValue, CString strInitDir)
 {
 	CString	strFilter = _T("All Files (*.*)|*.*||");
 	CString strFileList;
@@ -37,6 +40,9 @@ bool CFileDialogEx::GetPathOpenFileDlg(CStringArray &arrValue)
 	const int c_cbBuffSize = (c_cMaxFiles * (MAX_PATH + 1)) + 1;
 	FileDlg.GetOFN().lpstrFile = strFileList.GetBuffer(c_cbBuffSize);
 	FileDlg.GetOFN().nMaxFile = c_cbBuffSize;
+
+	if (strInitDir.IsEmpty() == false)
+		FileDlg.m_ofn.lpstrInitialDir = strInitDir;
 
 	if( FileDlg.DoModal() != IDOK) return false;
 	
@@ -51,11 +57,14 @@ bool CFileDialogEx::GetPathOpenFileDlg(CStringArray &arrValue)
 	return true;
 }
 
-bool CFileDialogEx::GetPathSaveFileDlg(CString &strValue)
+bool CFileDialogEx::GetPathSaveFileDlg(CString &strValue, CString strInitDir)
 {
 	CString	strFilter = _T("All Files (*.*)|*.*||");
 
 	CFileDialog FileDlg(FALSE, NULL, NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, m_strFileFilter);
+
+	if (strInitDir.IsEmpty() == false)
+		FileDlg.m_ofn.lpstrInitialDir = strInitDir;
 
 	if( FileDlg.DoModal() != IDOK ) return false;
 	
@@ -64,9 +73,12 @@ bool CFileDialogEx::GetPathSaveFileDlg(CString &strValue)
 	return true;
 }
 
-bool CFileDialogEx::GetPathSelectFolder(CString &strValue)
+bool CFileDialogEx::GetPathSelectFolder(CString &strValue, CString strInitDir)
 {
 	CFolderPickerDialog PickerDlg(NULL,OFN_FILEMUSTEXIST);
+
+	if (strInitDir.IsEmpty() == false)
+		PickerDlg.m_ofn.lpstrInitialDir = strInitDir;
 
 	if(PickerDlg.DoModal() != IDOK) return false;
 	
